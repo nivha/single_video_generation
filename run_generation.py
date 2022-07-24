@@ -41,6 +41,7 @@ def get_args():
     parser.add_argument('--reduce', default='median', help='patchmatch fold (vote) function')
     parser.add_argument('--vgpnn_type', default='pm', choices=['pm', 'vanilla'], help='vanilla means exhaustive search, pm=patchmatch')
     parser.add_argument('--use_noise', default='true', type=str2bool, help='add noise at coarsest level')
+    parser.add_argument('--noise_amp', default=5, type=float, help='amplitude of noise to add to coarsest level')
     parser.add_argument('--verbose', default='true', type=str2bool, help='')
     parser.add_argument('--save_intermediate', default='true', type=str2bool, help='save intermediate results')
 
@@ -94,7 +95,7 @@ if __name__=="__main__":
 
     time_start = now()
     vgpnn_out = VGPNN.forward(
-        VGPNN.q0, noises_dict={0: z}, noises_amps={0: 5},
+        VGPNN.q0, noises_dict={0: z}, noises_amps={0: args.noise_amp},
         n_stages=None, return_input=False,
         save_dir=args.save_intermediate_path,
         verbose=args.verbose,

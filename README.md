@@ -8,7 +8,7 @@
 
 ### Data
 
-Please download the videos from this [Dropbox Videos Folder](https://www.dropbox.com/sh/gbt6rnm3b7afdk5/AAAXqWZGt0LUEjnYy-5-khyXa?dl=0) into ```./data``` folder.
+You can download videos from this [Dropbox Videos Folder](https://www.dropbox.com/sh/gbt6rnm3b7afdk5/AAAXqWZGt0LUEjnYy-5-khyXa?dl=0) into ```./data``` folder.
 
 Note that a video is represented as a directory with PNG files in the format \<frame number\>.png
 
@@ -32,8 +32,8 @@ python run_generation.py --gpu 0 --frames_dir <path to frames dir> --start_frame
 Examples:
 
 ```
-python run_generation.py --frames_dir=data/air_balloons --start_frame=66 --end_frame=80
-python run_generation.py --frames_dir=data/air_balloons --start_frame=66 --end_frame=165 --max_size=360 --sthw='(0.5,1,1)'
+python run_generation.py --frames_dir=data/airballoons_QGAMTlI6XxY --start_frame=66 --end_frame=80
+python run_generation.py --frames_dir=data/airballoons_QGAMTlI6XxY --start_frame=66 --end_frame=165 --max_size=360 --sthw='(0.5,1,1)'
 ```
 
 
