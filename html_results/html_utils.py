@@ -1,3 +1,5 @@
+__author__ = "Niv Haim (niv.haim@weizmann.ac.il)"
+
 import os
 import jinja2
 
