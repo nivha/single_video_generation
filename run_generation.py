@@ -24,26 +24,25 @@ def get_args():
     parser = argparse.ArgumentParser(description='')
 
     # general parameters
-    parser.add_argument('--cuda', default='False', type=str2bool, help='')
-    parser.add_argument('--gpu', default='0', help='which gpu to select')
-    parser.add_argument('--results_dir', default='./results/generation', help='')
+    parser.add_argument('--gpu', default='0', help='which gpu to use')
+    parser.add_argument('--results_dir', default='./results/generation', help='where to save the results')
 
     # VGPNN params
-    parser.add_argument('--frames_dir', help='')
-    parser.add_argument('--start_frame', default=1, type=int, help='')
-    parser.add_argument('--end_frame', default=15, type=int, help='')
-    parser.add_argument('--max_size', default=144, type=int, help='')
-    parser.add_argument('--min_size', default='(3,15)', type=str2list, help='')
-    parser.add_argument('--downfactor', default='(0.85,0.85)', type=str2list, help='')
-    parser.add_argument('--J', default=5, type=int, help='')
-    parser.add_argument('--J_start_from', default=1, type=int, help='')
+    parser.add_argument('--frames_dir', help='path to directory with frames (see README for video format)')
+    parser.add_argument('--start_frame', default=1, type=int, help='use this #d.png as first frame in the video')
+    parser.add_argument('--end_frame', default=15, type=int, help='use this #d.png as last frame in the video')
+    parser.add_argument('--max_size', default=144, type=int, help='maximal spatial size (same as in SinGAN)')
+    parser.add_argument('--min_size', default='(3,15)', type=str2list, help='shape of the coarsest pyramid level (T,HW)')
+    parser.add_argument('--downfactor', default='(0.85,0.85)', type=str2list, help='downscale factor of the pyramid (T,HW)')
+    parser.add_argument('--J', default=5, type=int, help='number of EM-iterations within level')
+    parser.add_argument('--J_start_from', default=1, type=int, help='all levels before this will us J=1')
     parser.add_argument('--kernel_size', default='(3,7,7)', type=str2list, help='')
-    parser.add_argument('--sthw', default='(0.5,1,1)', type=str2list, help='')
-    parser.add_argument('--reduce', default='median', help='')
-    parser.add_argument('--vgpnn_type', default='pm', help='', choices=['pm', 'vanilla'])
-    parser.add_argument('--use_noise', default='true', type=str2bool, help='')
+    parser.add_argument('--sthw', default='(0.5,1,1)', type=str2list, help='scaling factor of the output w.r.t to the input video')
+    parser.add_argument('--reduce', default='median', help='patchmatch fold (vote) function')
+    parser.add_argument('--vgpnn_type', default='pm', choices=['pm', 'vanilla'], help='vanilla means exhaustive search, pm=patchmatch')
+    parser.add_argument('--use_noise', default='true', type=str2bool, help='add noise at coarsest level')
     parser.add_argument('--verbose', default='true', type=str2bool, help='')
-    parser.add_argument('--save_intermediate', default='true', type=str2bool, help='')
+    parser.add_argument('--save_intermediate', default='true', type=str2bool, help='save intermediate results')
 
     args = parser.parse_args()
 
@@ -63,6 +62,7 @@ if __name__=="__main__":
     import torchvision.io
     from utils import image
     from utils.main_utils import now, save_vid
+    from html_results.html_utils import create_results_html
     import vgpnn
     args.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
@@ -106,3 +106,13 @@ if __name__=="__main__":
     vid_ = image.tensor2npimg(vgpnn_out, to_numpy=False).permute(1, 2, 3, 0)
     torchvision.io.write_video(f'{args.results_dir}/output.mp4', vid_, fps=10)
     print('saved results to:', args.results_dir)
+
+    if args.save_intermediate:
+        # show all intermediate results in HTML format
+        base_dir = args.results_dir
+        html_filename = 'result.html'
+        vid_folders = [
+            (f'scale_{s}', [f'{s}/v', f'{s}/q', f'{s}/r'], 'green', 'flex', 30, True) for s in reversed(range(VGPNN.n_stages))
+        ]
+        create_results_html(vid_folders, base_dir, html_filename, frame_rate=10)
+

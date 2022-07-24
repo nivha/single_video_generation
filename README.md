@@ -32,8 +32,8 @@ python run_generation.py --gpu 0 --frames_dir <path to frames dir> --start_frame
 Examples:
 
 ```
-python run_generation.py --frames_dir=data/air_balloons --start_frame=61 --end_frame=73
-python run_generation.py --frames_dir=data/air_balloons --start_frame=61 --end_frame=160 --max_size=360 --sthw='(0.5,1,1)'
+python run_generation.py --frames_dir=data/air_balloons --start_frame=66 --end_frame=80
+python run_generation.py --frames_dir=data/air_balloons --start_frame=66 --end_frame=165 --max_size=360 --sthw='(0.5,1,1)'
 ```
 
 
