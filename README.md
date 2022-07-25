@@ -1,8 +1,11 @@
-# VGPNN: Diverse Generation from a Single Video Made Possible
+<h1 align="center"> VGPNN: <br> Diverse Generation from a Single Video Made Possible </h1>
 
-[Project](https://nivha.github.io/vgpnn) | [Arxiv](https://arxiv.org/abs/2109.08591) 
+<div align="center"><font size="+1"><em>Accepted to ECCV 2022</em></font></div>
+
+<div align="center"> <a href=https://nivha.github.io/vgpnn> Project </a> | <a href=https://arxiv.org/abs/2109.08591> Arxiv </a></div>
+
 #### Pytorch implementation of the paper: "Diverse Generation from a Single Video Made Possible"
-(To appear in ECCV 2022)
+
 
 ## Code
 
