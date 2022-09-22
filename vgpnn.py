@@ -192,8 +192,8 @@ class PMVGPNN:
 
 
 def get_vgpnn(frames_dir, start_frame, end_frame, device,
-             max_size, min_size, downfactor, J, J_start_from, kernel_size,
-             sthw, reduce, ext='png', verbose=False, vgpnn_type=None):
+             max_size, min_size, downfactor, J, kernel_size,
+             sthw, reduce, J_start_from=1, ext='png', verbose=False, vgpnn_type=None):
 
     o = lambda: None
     # input parameters
