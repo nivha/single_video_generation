@@ -79,10 +79,12 @@ python run_generation.py --gpu 0 --frames_dir data/airballoons_QGAMTlI6XxY --sta
 If you find our project useful for your work please cite:
 
 ```
-@article{haim2021vgpnn,
-  author    = {Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal},
-  title     = {Diverse Generation from a Single Video Made Possible},
-  journal   = {arXiv preprint arXiv:2109.08591},
-  year      = {2021},
+@inproceedings{haim2022diverse,
+  title={Diverse generation from a single video made possible},
+  author={Haim, Niv and Feinstein, Ben and Granot, Niv and Shocher, Assaf and Bagon, Shai and Dekel, Tali and Irani, Michal},
+  booktitle={European Conference on Computer Vision},
+  pages={491--509},
+  year={2022},
+  organization={Springer}
 }
 ```
